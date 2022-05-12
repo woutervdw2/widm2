@@ -1,4 +1,8 @@
 # Created by .ignore support plugin (hsz.mobi)
+*.mp3
+*.mp4
+Executie
+*.wav
 __pycache__/Classes.cpython-39.pyc
 __pycache__/Functies.cpython-39.pyc
 __pycache__/combine_csv.cpython-38.pyc
