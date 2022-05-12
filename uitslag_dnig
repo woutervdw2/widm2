@@ -1,0 +1,47 @@
+import pandas as pd
+pd.set_option('display.max_columns', None)
+
+df = pd.read_csv('totaal_csv\\quiz_1 - Copy.csv')
+lijst = ['naam']
+for i in range(1,33):
+    lijst.append(str(i))
+
+with open('test_files\\quiz_1.txt') as f:
+    lijst_naam_vraag =f.readlines()
+
+lijst_naam_vraag = [x.strip() for x in lijst_naam_vraag]
+lijst_final = ['naam']
+df_antwoord = df[lijst]
+
+#print(df['tijd_delta'])
+
+for i in range(len(lijst_naam_vraag)):
+
+    if lijst_naam_vraag[i].endswith('?'):
+        current_question = int(lijst_naam_vraag[i][0])
+        lijst_final.append(lijst_naam_vraag[i])
+
+    # if lijst_naam_vraag[i].startswith('!'):
+    #     for i in range(len(df_antwoord)):
+    #         print(df_antwoord.iloc[df_antwoord.index[i], current_question])
+    #         if df_antwoord.iloc[df_antwoord.index[i], current_question] == True:
+    #             df_antwoord.iloc[df_antwoord.index[i], current_question] = lijst_naam_vraag[i]
+
+
+
+df_antwoord.columns = lijst_final
+df_antwoord.set_index(['naam'], inplace = True)
+scores = df_antwoord.cumsum(axis = 1)
+print(df_antwoord)
+print(df_antwoord.cumsum(axis = 1))
+import matplotlib.pyplot as plt
+plt.figure(figsize=(15,10))
+
+plt.plot(scores.drop('wouter',0).T)
+plt.legend(scores.index[1:])
+
+# plt.xticks()
+plt.show()
+#for  in range(len_df_antwoord):
+
+#print(df_antwoord)
