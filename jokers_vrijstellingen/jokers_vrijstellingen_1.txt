@@ -1,3 +1,4 @@
 Zet achter de mol een kruisje. Zet ook achter de deelnemers die tijdens een test een vrijstelling ingezet hebben een kruisje. Zet het aantal ingezette jokers bij een test ook achter de bijbehorende speler.
-wouter x
-timo
+w  x
+g
+t

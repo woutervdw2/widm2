@@ -157,11 +157,6 @@ def main():
 
 
     while voltooide_tests < aantal_deelnemers:
-        try:
-            print(testnummer)
-
-        except:
-            print('nope')
         quiz_invoer_scherm()
         speel_muziekje.next_source()
         voltooide_tests += 1

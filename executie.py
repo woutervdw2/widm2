@@ -74,7 +74,7 @@ def open_uitslag():
         df_quiz = combine_csv_from_same_test(quiz_nummer)
     except:
         logging.error(f"De test met het nummer {quiz_nummer} heeft geen csv. Deze test is dus nog niet gemaakt.")
-        entry_begin.delete(first=0, last=len(entry1.get()))
+        entry_begin.delete(first=0, last=len(entry_begin.get()))
         entry_begin.insert(0, 'Invalid')
 
     deelnemers_dict = import_csv_data(df_quiz)
@@ -187,8 +187,8 @@ def naam_invoer_scherm():
 
 global Canvas1, error_occured
 error_occured = False
-logging.basicConfig(filename=f"executie_logs\executie_{test_nummer}.log", encoding = "utf-8", filemode="w",
-                        level=logging.DEBUG, format="%(asctime)s - %(levelname)s - %(message)s")
+# logging.basicConfig(filename=f"executie_logs\executie_{test_nummer}.log", encoding = "utf-8", filemode="w",
+#                         level=logging.DEBUG, format="%(asctime)s - %(levelname)s - %(message)s")
 Canvas1 = Canvas(root, bg='blue', highlightthickness=0)
 img = maak_image('achtergrond_quiz.jpg', full_width)
 Canvas1.create_image(0,0,image = img, anchor='nw')

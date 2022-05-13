@@ -35,6 +35,7 @@ def combine_csv_from_same_test(test_nummer : int):
                 error_occured = True
 
     if not error_occured:
+
         logging.info(f"Alle bestanden zijn geopend en samengevoegd.")
 
     """"
