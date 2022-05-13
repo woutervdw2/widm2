@@ -24,21 +24,14 @@ pyglet.font.add_file('OCRAEXT.TTF')
 def maak_root():
     global button, button_no, img, root, Canvas1, full_width, full_height, text_coordx, text_coordy
     root = Tk()
-    #todo change back
-    #
-    root.attributes('-fullscreen', True)  # make main window full-screen
-    # root.geometry("1920x1080")
-    # # set minimum window size value
-    # root.minsize(1920, 1080)
-    # #set maximum window size value
-    # root.maxsize(1920, 1080)
 
-    #tot hier
+    root.attributes('-fullscreen', True)  # make main window full-screen
+
 
     root.update()
     full_width = root.winfo_width()
     full_height = root.winfo_height()
-    # print(full_width, full_height)
+
     font = ('OCR A Extended', 30, 'bold')
     txt = tkFont.Font(family="OCR A Extended", size=30)
 
