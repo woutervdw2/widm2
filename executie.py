@@ -100,7 +100,7 @@ def open_uitslag():
 
 
 def import_csv_data(df : pd.DataFrame):
-    aantal_vragen = (len(df.columns) - 4)/2
+    aantal_vragen = (len(df.columns) - 5)/2
     deelnemers_dict = {a : True for a in df.index.tolist()}
     print(deelnemers_dict)
     with open(f'jokers_vrijstellingen.txt') as f:
