@@ -8,6 +8,7 @@ class Spelers:
         self.laatste_test = 0
         self.vragen_goed = 0
         self.mol = mol
+        self.antwoorden = ""
         
     def __str__(self):
         if self.in_game  == True:
@@ -15,7 +16,8 @@ class Spelers:
         else:
             return "%s is uit het spel" % (self.name)
     
-    
+    def add_antwoord(self, antwoord):
+        self.antwoorden += "}" + antwoord
     def vraag_goed(self):
         self.vragen_goed += 1
         

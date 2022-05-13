@@ -1,4 +1,7 @@
-
+# Het maken van een test tekst bestand
+Het is hetzelfde als vorig jaar. In de map ``test_files`` kan je txt bestanden zetten.
+Stel je wilt alle vragen erin zetten voor aflevering 4, dan noem je het ``quiz_4.txt``. Elke vraag moet eindigen met een
+vraagteken. In de regels die daarop volgen plaats je de antwoorden. Voor het goede antwoord plaats je een uitroepteken. 
 # Voorbereidingen voor een test
 Voordat de test gemaakt kan worden door de kandidaten moet je de volgende dingen doen. **Deze stappen moeten op alle laptops worden 
 uitgevoerd!**
@@ -31,6 +34,7 @@ eind van de bestanden ``quiz_afleveringnummer_username.csv`` staan. In andere wo
    maar test ``2`` niet meer, dan moet ``barta`` uit het bestand gehaald worden. Elke gebruikersnaam moet op een eigen regel staan
    net als bij de vragen en antwoorden text files.
    
+   
 
 
 # Errors executie
@@ -41,7 +45,7 @@ Elke regel geeft informatie over een onderdeel van het programma. Het volgende f
 error staat betekent dit dat er iets niet goed verlopen is. Zodra dit het geval is kan je het bericht kopiëren en opzoeken
 in deze readme. Deze readme geeft dan precies aan welke stappen je moet ondernemen om de error op te lossen.
 
-## Het bestand van ``inlognaam`` ontbreekt in de map losse_csv
+### Het bestand van ``inlognaam`` ontbreekt in de map losse_csv
 Dit kan twee dingen betekenen:
 1. Het inlognamen bestand klopt niet. Dit betekent dat hier een laptop naam in staat die niet gebruikt is voor de huidige
 test. Dit los je op door in het bestand inlognamen onder elkaar alleen de namen te zetten van de laptops waarop
@@ -50,12 +54,12 @@ test. Dit los je op door in het bestand inlognamen onder elkaar alleen de namen 
 2. Het bestand van de laptop met de ``inlognaam`` ontbreekt in de map ``losse_csv``. Dit is op te lossen door het bestand
 van de laptop van ``inlognaam`` op de usb-stick te zetten en vervolgens op jouw laptop te zetten.
    
-## De volgende mensen hebben twee keer de test gemaakt:
+### De volgende mensen hebben twee keer de test gemaakt:
 Dit betekent dat de mensen die geprint worden de test twee keer gemaakt hebben. Dit kan je oplossen
 door naar de map ``losse_csv`` te gaan en in alle csv bestanden van dat quiz nummer te kijken waar die persoon dubbel in staat.
 Vervolgens verwijder je een van die regels uit het bestand en dat heeft diegene de test maar 1 keer gemaakt.
 
-## ``persoon`` zit in het spel maar heeft de test nog niet gemaakt
+### ``persoon`` zit in het spel maar heeft de test nog niet gemaakt
 Dit kan twee redenen hebben:
 1. De persoon moet de test nog maken. Dit kan je doen door de test opnieuw te openen op jouw laptop en die persoon hem
 nog laten maken op jouw laptop.
@@ -63,7 +67,7 @@ nog laten maken op jouw laptop.
 2. Het bestand ``jokers_vrijstellingen`` klopt niet. Je kan dit oplossen door de persoon die uit het spel ligt en die toch aangegeven
 wordt als in het spel uit het bestand ``jokers_vrijstellingen.txt`` te halen.
    
-# De volgende mensen hebben de test gemaakt terwijl ze uit het spel liggen:
+### De volgende mensen hebben de test gemaakt terwijl ze uit het spel liggen:
 Dit kan drie redenen hebben:
 1. Iemand heeft de test gemaakt maar die persoon ligt uit het spel. Dit kan je oplossen door naar de csv van de bijbehorende test te gaan in de map
 ``losst_csv`` en de regel van die persoon uit de csv te halen. Nu kan je de executie code opnieuw uitvoeren.
@@ -77,8 +81,26 @@ verkeerd getypte naam te veranderen zodat die goed gespeld is.
 
 
 
-## Het lettertype is niet hetzelfde als op tv.
+### Het lettertype is niet hetzelfde als bij het televisie programma.
 Dit betekent dat de font niet is geinstalleerd op de laptop. Doe dit door het bestand ``OCRAEXT.TTF`` te openen
 en op installeren te drukken. 
 
-## 
+### Het groene scherm, rode scherm of het afvaller muziekje ontbreekt.
+Dit betekent dat een of meerdere van die bestanden ontbreekt. Controleer of in de map ``Executie`` de bestanden
+``Groen_echte_final.mp4`` en ``Rood_1.mp4`` aanwezig zijn. Als die er niet zijn moeten die bestanden erop gezet
+worden vanaf de usb-stick. Controleer vervolgens of het bestand ``afvaller_muziek.mp3`` in de hoofdmap van het project staat
+
+### ``persoon`` heeft de test niet gemaakt
+
+Dit betekent dat de naam die is ingevoerd in het venster niet voorkomt in de csv.
+Dit kan dus betekenen dat je de naam verkeerd hebt getypt of dat die persoon zijn/haar naam bij het maken van de test verkeerd heeft ingetypt.
+Dit kan je oplossen door naar de csv van de test te gaan in de map ``losse_csv`` en de naam daar aan te passen.
+
+### Het bestand ``path`` ontbreekt
+Dit betekent dat je het bestand met het pad ``path`` in de hoofdmap van het project moet zetten.
+Deze staat op de usb-stick in de map ``widm`` op de locatie die ``path`` aangeeft.
+
+### Het bestand jokers_vrijstelling.txt ontbreekt.
+Dit los je op door het bestand ``jokers_vrijstellingen.txt`` van de usb-stick af te halen en in de hoofdmap
+van het project te zetten. Deze open je vervolgens en dan haal je alle namen uit het bestand van de mensen die
+uit het spel liggen. Sla vervolgens het bestand op.  

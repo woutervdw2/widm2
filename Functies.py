@@ -134,14 +134,14 @@ def plaats_antwoorden(antwoorden, canvas, root, full_height, full_width,text_coo
                                                     text_coordy=text_coordy, root=root,
                                                     full_height=full_height, full_width=full_width,
                                                     button_no=button_noklik,
-                                                    button=button_klik, txt_file = txt_file))
+                                                    button=button_klik, txt_file = txt_file, text=antwoorden[i].text))
 
         else:
             b = tk.Button(canvas, image=button_noklik, relief=FLAT, borderwidth=0, highlightthickness=0, bd=0,
                           command=lambda i=i: Click(i, button_klik, vraagnummer, aantal_vragen, correct = False, player = player,
                                                     vragen = vragen, Canvas1 = canvas, text_coordx=text_coordx, text_coordy=text_coordy, root=root,
                                                     full_height = full_height, full_width = full_width, button_no = button_noklik,
-                                                    button=button_klik, txt_file = txt_file))
+                                                    button=button_klik, txt_file = txt_file, text=antwoorden[i].text))
 
         b.place(x=xcoord, y=ycoord)
         root.update()
@@ -157,20 +157,21 @@ def plaats_antwoorden(antwoorden, canvas, root, full_height, full_width,text_coo
 
     return buttons
 
-def Click(index, button_klik,  vraagnummer, aantal_vragen, correct, player, vragen, Canvas1, text_coordx, text_coordy, root, full_height, full_width, button_no, button, txt_file):
+def Click(index, button_klik,  vraagnummer, aantal_vragen, correct, player, vragen, Canvas1, text_coordx, text_coordy, root, full_height, full_width, button_no, button, txt_file, text):
     verander_img(index, button_klik, root)
-    Click2(vraagnummer, aantal_vragen, correct, player, vragen, Canvas1, text_coordx, text_coordy, root, full_height, full_width, button_no, button, txt_file)
+    Click2(vraagnummer, aantal_vragen, correct, player, vragen, Canvas1, text_coordx, text_coordy, root, full_height, full_width, button_no, button, txt_file, text)
 
 def verander_img(index, button_klik, root):
     img = button_klik
     buttons[index].configure(image=img)
     root.update()
 
-def Click2(vraagnummer, aantal_vragen, correct, player, vragen, Canvas1, text_coordx, text_coordy, root, full_height, full_width, button_no, button, txt_file):
+def Click2(vraagnummer, aantal_vragen, correct, player, vragen, Canvas1, text_coordx, text_coordy, root, full_height, full_width, button_no, button, txt_file, text):
     string_vraag = str(vraagnummer) + '_tijd'
     if correct:
         player.vraag_goed()
     df_quiz[string_vraag] = time.time() - df_quiz.loc[df_quiz.index[0], string_vraag]
+    player.add_antwoord(text)
     df_quiz[str(vraagnummer)] = correct
     sound_klik = pyglet.media.load('sound_klik.mp3', streaming=False)
     sound_klik.play()
@@ -192,6 +193,8 @@ def nieuwe_vraag(vraagnummer, aantal_vragen, vragen, Canvas1, text_coordy, text_
         buttons = plaats_antwoorden(antwoorden_1, Canvas1, root, full_height, full_width, text_coordx, text_coordy, button_no, button,
                                     player, vraagnummer, aantal_vragen, vragen, txt_file)
     else:
+        df_quiz['antwoorden'] = ""
+        df_quiz.loc[0,'antwoorden'] = player.antwoorden
         logging.info(f"{player.naam} is klaar met de quiz, voeg toe aan csv")
         try:
             csv_naampje = absolute_pad + '\\losse_csv' + txt_file + "_"+  os.getlogin() + '.csv'
