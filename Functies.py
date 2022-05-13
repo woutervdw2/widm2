@@ -37,16 +37,19 @@ def maak_image(PATH, width):
 def lees_quiz(txt_file, player):
     """Open de txt file van een quiz en stop de vragen in een dictionary"""
     global aantal_deelnemers
+    try:
+        with open(absolute_pad + '\\test_files' + txt_file + '.txt', 'r', encoding='utf-8') as f:
+            lijst_regels = f.readlines()
+    except:
+        logging.error(f"Test file niet gevonden controleer path: test_files\{txt_file}.txt")
 
-    with open(absolute_pad + '\\test_files' + txt_file + '.txt', 'r', encoding='utf-8') as f:
-        lijst_regels = f.readlines()
-    
     lijst_regels = [x.strip() for x in lijst_regels]
     vraag_dict = {}
     current_question = 0
     global df_quiz
-
+    logging.info(f"Quiz {txt_file} is ingeladen")
     df_quiz = pd.DataFrame(columns = ['naam', 'start_time'])
+    logging.info(f"Speler {player.naam} kan beginnen met de test")
     player.begin_quiz()
     new_row = {'naam' : player.naam, 'start_time' : player.test_tijd_begin}
     df_quiz = df_quiz.append(new_row, ignore_index = True)
@@ -57,16 +60,11 @@ def lees_quiz(txt_file, player):
         if lijst_regels[i].endswith('?'):
             current_question += 1
             vraag_dict[current_question] = [lijst_regels[i]]
-            
-        
         else:
             vraag_dict[current_question].append(lijst_regels[i])
     if os.path.isfile(absolute_pad + '\\losse_csv\\'+ txt_file + "_" + os.getlogin() + '.csv'):
         pass
     else:
-        #columns = ['naam', 'start_time', 'vragen_goed']
-        #for i in range(1, current_question+1):
-        #    columns.extend([str(i)+'_tijd', i])
         df = pd.DataFrame(columns = ['wahe'])
         df.to_csv(absolute_pad + '\\losse_csv\\' + txt_file + "_" + os.getlogin() + '.csv', index = False)
 
@@ -90,13 +88,16 @@ def maak_vraag(vraag_dict : dict, vraag_nummer : int, df_quiz : pd.DataFrame, ro
     df_quiz['vragen_goed'] = 0
     vraag_dict[vraag_nummer] = vraag_dict[vraag_nummer][1:]
     random.shuffle(vraag_dict[vraag_nummer])
+    goed_antwoord = False
     for i in range(0, len(vraag_dict[vraag_nummer])):
         if vraag_dict[vraag_nummer][i].startswith('!'):
+            goed_antwoord = True
             button_objects.append(Buttons(text=vraag_dict[vraag_nummer][i][1:], correct=True))
         
         else:
             button_objects.append(Buttons(text=vraag_dict[vraag_nummer][i], correct=False))
-            
+    if not goed_antwoord:
+        logging.error(f"Vraag {vraag_nummer} heeft geen goed antwoord")
     return vraag, button_objects
 
 def plaats_vraag(vraag, canvas, text_coordx, text_coordy, root):
@@ -112,7 +113,6 @@ def plaats_antwoorden(antwoorden, canvas, root, full_height, full_width,text_coo
     txt = tkFont.Font(family="OCR A Extended", size=30)
     global buttons
     buttons = []
-    #todo controleer plaats en breek lange antwoorden
 
     for i in range(len(antwoorden)):
         if len(antwoorden)>3:
@@ -193,15 +193,19 @@ def nieuwe_vraag(vraagnummer, aantal_vragen, vragen, Canvas1, text_coordy, text_
                                     player, vraagnummer, aantal_vragen, vragen, txt_file)
     else:
         logging.info(f"{player.naam} is klaar met de quiz, voeg toe aan csv")
-        csv_naampje = absolute_pad + '\\losse_csv' + txt_file + "_"+  os.getlogin() + '.csv'
+        try:
+            csv_naampje = absolute_pad + '\\losse_csv' + txt_file + "_"+  os.getlogin() + '.csv'
+            df = pd.read_csv(csv_naampje)
+        except:
+            logging.info(f"Opslag csv is niet gevonden, controleer path: losse_csv\{txt_file}_{os.getlogin()}.csv")
+
         df_quiz['eind_time'] = time.time()
         df_quiz['tijd_delta'] = df_quiz.loc[df_quiz.index[0], 'eind_time'] - df_quiz.loc[df_quiz.index[0], 'start_time']
         df_quiz['vragen_goed'] = player.vragen_goed
         player.eind_quiz()
         player.total_tijd()
-        df = pd.read_csv(csv_naampje)
+
         if len(df.columns) == 1:
-            df = pd.DataFrame(columns = df_quiz.columns)
             df = pd.DataFrame(columns = df_quiz.columns)
             df.to_csv(csv_naampje, index = False)
 
