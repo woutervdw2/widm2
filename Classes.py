@@ -9,6 +9,7 @@ class Spelers:
         self.vragen_goed = 0
         self.mol = mol
         self.antwoorden = ""
+        self.bool_antwoorden = ""
         
     def __str__(self):
         if self.in_game  == True:
@@ -20,7 +21,11 @@ class Spelers:
         self.antwoorden += "}" + antwoord
     def vraag_goed(self):
         self.vragen_goed += 1
-        
+    def add_bool_antwoord(self, bool_antwoord):
+        self.bool_antwoorden += bool_antwoord
+    def tussen_tijd_berekenen(self):
+        self.tussen_tijd = time.time() - self.test_tijd_begin
+        return self.tussen_tijd
     def begin_quiz(self):
         self.test_tijd_begin = time.time()
         

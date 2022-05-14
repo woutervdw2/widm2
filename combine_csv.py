@@ -22,7 +22,7 @@ def combine_csv_from_same_test(test_nummer : int):
         """
         if index == 0:
             try:
-                df_final = pd.read_csv(f"{path}/quiz_{test_nummer}_{element}.csv", index_col="naam")
+                df_final = pd.read_csv(f"{path}/quiz_{test_nummer}_{element}.csv")
             except:
                 logging.error(f"Het bestand van {element} ontbreekt in de map losse_csv")
                 error_occured = True

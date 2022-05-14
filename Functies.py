@@ -170,8 +170,12 @@ def Click2(vraagnummer, aantal_vragen, correct, player, vragen, Canvas1, text_co
     string_vraag = str(vraagnummer) + '_tijd'
     if correct:
         player.vraag_goed()
+        player.add_bool_antwoord(str(1))
+    else:
+        player.add_bool_antwoord(str(0))
     df_quiz[string_vraag] = time.time() - df_quiz.loc[df_quiz.index[0], string_vraag]
     player.add_antwoord(text)
+
     df_quiz[str(vraagnummer)] = correct
     sound_klik = pyglet.media.load('sound_klik.mp3', streaming=False)
     sound_klik.play()
@@ -192,6 +196,12 @@ def nieuwe_vraag(vraagnummer, aantal_vragen, vragen, Canvas1, text_coordy, text_
         plaats_vraag(vraag_1, Canvas1, text_coordx, text_coordy, root)
         buttons = plaats_antwoorden(antwoorden_1, Canvas1, root, full_height, full_width, text_coordx, text_coordy, button_no, button,
                                     player, vraagnummer, aantal_vragen, vragen, txt_file)
+        with open("tijdelijke_opslag.txt", "w") as filehandle:
+            filehandle.truncate(0)
+            filehandle.write(player.bool_antwoorden)
+        with open("tijdelijke_opslag_tijd.txt", "w") as filehandle2:
+            filehandle2.truncate(0)
+            filehandle2.write(str(player.tussen_tijd_berekenen()))
     else:
         df_quiz['antwoorden'] = ""
         df_quiz.loc[0,'antwoorden'] = player.antwoorden
@@ -205,16 +215,14 @@ def nieuwe_vraag(vraagnummer, aantal_vragen, vragen, Canvas1, text_coordy, text_
         df = pd.read_csv(csv_naampje)
         if len(df.columns) == 1:
             df = pd.DataFrame(columns = df_quiz.columns)
-            df = pd.DataFrame(columns = df_quiz.columns)
-            df.to_csv(csv_naampje, index = False)
+            df.to_csv(csv_naampje, index = False, encoding = "utf-8")
 
         list_quiz = df_quiz.values.tolist()[0]
 
-        with open(csv_naampje, 'a', newline='') as f_object:
+        with open(csv_naampje, 'a', newline='', encoding= "utf-8") as f_object:
             writer_object = writer(f_object)
             writer_object.writerow(list_quiz)
             f_object.close()
-
         root.destroy()
 
 
