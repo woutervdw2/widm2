@@ -202,7 +202,7 @@ def nieuwe_vraag(vraagnummer, aantal_vragen, vragen, Canvas1, text_coordy, text_
         df_quiz['vragen_goed'] = player.vragen_goed
         player.eind_quiz()
         player.total_tijd()
-        df = pd.read_csv(csv_naampje)
+        df = pd.read_csv(csv_naampje, encoding='latin-1')
         if len(df.columns) == 1:
             df = pd.DataFrame(columns = df_quiz.columns)
             df = pd.DataFrame(columns = df_quiz.columns)
