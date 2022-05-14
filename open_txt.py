@@ -81,6 +81,8 @@ def test_maker():
 
 
 def doe_test():
+    with open("tijdelijke_opslag.txt", "w") as filehandle:
+        filehandle.truncate(0)
     global speel_muziekje
     try:
         speel_muziekje = muziek.play()

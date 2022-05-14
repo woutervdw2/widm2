@@ -12,6 +12,6 @@ with open("tijdelijke_opslag.txt") as backup_file:
 
 print(lines)
 
-# for element in lijst_antwoorden:
+# for element in lijst_antwoorden:ds
 
 print(lijst_antwoorden)
