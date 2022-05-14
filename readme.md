@@ -104,3 +104,9 @@ Deze staat op de usb-stick in de map ``widm`` op de locatie die ``path`` aangeef
 Dit los je op door het bestand ``jokers_vrijstellingen.txt`` van de usb-stick af te halen en in de hoofdmap
 van het project te zetten. Deze open je vervolgens en dan haal je alle namen uit het bestand van de mensen die
 uit het spel liggen. Sla vervolgens het bestand op.  
+
+### In het geval dat de test bij een persoon uitvalt tijdens het maken.
+Zodra een computer uitvalt of om de een of andere reden valt het programma uit. maak dan een back-up van de bestanden
+``tijdelijke_opslag.txt`` en ``tijdelijke_opslag_tijd.txt``. Laat vervolgens diegene waarbij de test fout ging de test
+opnieuw maken. Nadat iedereen de test gemaakt heeft open je nu het csv bestand wat bij de test hoort en waar de persoon in 
+staat waarbij het programma crashte. Open ook het bestand ``tijdelijke_opslag.txt``. 
