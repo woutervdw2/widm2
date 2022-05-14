@@ -1,0 +1,7 @@
+2022-05-14 23:56:30,367 - ERROR - Het bestand van losse_csv/quiz_w_20173845.csv ontbreekt in de map losse_csv
+2022-05-14 23:56:30,367 - ERROR - De test met het nummer w heeft geen csv. Deze test is dus nog niet gemaakt.
+Error: local variable 'df_final' referenced before assignment
+2022-05-14 23:56:37,454 - INFO - Alle bestanden zijn geopend en samengevoegd.
+2022-05-14 23:56:37,455 - INFO - Niemand heeft de test twee keer gemaakt.
+2022-05-14 23:56:37,455 - INFO - Alle mensen die de test hebben gemaakt zitten nog in het spel.
+2022-05-14 23:56:37,455 - INFO - De test is gemaakt door iedereen die nog in het spel zit en niemand heeft de test dubbel gemaakt

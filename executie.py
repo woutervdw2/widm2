@@ -72,8 +72,9 @@ def open_uitslag():
     try:
         quiz_nummer = entry_begin.get()
         df_quiz = combine_csv_from_same_test(quiz_nummer)
-    except:
-        logging.error(f"De test met het nummer {quiz_nummer} heeft geen csv. Deze test is dus nog niet gemaakt.")
+    except Exception as e:
+        logging.error(f"De test met het nummer {quiz_nummer} heeft geen csv. Deze test is dus nog niet gemaakt.\n"
+                      f"Error: {e}")
         entry_begin.delete(first=0, last=len(entry_begin.get()))
         entry_begin.insert(0, 'Invalid')
 
@@ -100,9 +101,8 @@ def open_uitslag():
 
 
 def import_csv_data(df : pd.DataFrame):
-    aantal_vragen = (len(df.columns) - 5)/2
-    deelnemers_dict = {a : True for a in df.index.tolist()}
-    print(deelnemers_dict)
+    aantal_vragen = (len(df.columns) - 6)/2
+    deelnemers_dict = {a : True for a in df['naam'].tolist()}
     with open(f'jokers_vrijstellingen.txt') as f:
         jokers_vrijstellingen = f.readlines()
 
@@ -112,24 +112,26 @@ def import_csv_data(df : pd.DataFrame):
 
         current_persoon = jokers_vrijstellingen[i]
 
+
         if current_persoon.endswith('x'):
             current_persoon = current_persoon.rsplit(' ', 1)[0]
             current_persoon = current_persoon.split()[0].strip()
-            df.loc[current_persoon, 'vragen_goed'] = aantal_vragen + 1
+            df.loc[df['naam']==current_persoon, 'vragen_goed'] = aantal_vragen + 1
 
 
         elif current_persoon[-1].isdigit():
             aantal_jokers = int(current_persoon[-1])
             current_persoon = current_persoon.rsplit(' ', 1)[0]
             current_persoon = current_persoon.split()[0].strip()
-            df.loc[current_persoon, 'vragen_goed'] = df.loc[current_persoon, 'vragen_goed'] + aantal_jokers
+            df.loc[df['naam']==current_persoon, 'vragen_goed'] = df.loc[df['naam']==current_persoon, 'vragen_goed'] + aantal_jokers
 
 
-            if int(df.loc[current_persoon, 'vragen_goed']) > aantal_vragen:
-                df.loc[current_persoon, 'vragen_goed'] = aantal_vragen
+            if int(df.loc[df['naam']==current_persoon, 'vragen_goed']) > aantal_vragen:
+                df.loc[df['naam'] == current_persoon, 'vragen_goed'] = aantal_vragen
 
 
     minvalue_vragen_goed = df['vragen_goed'].min()
+
     if minvalue_vragen_goed <= aantal_vragen:
 
         df_minste_goed = df[df['vragen_goed'] == minvalue_vragen_goed]
@@ -138,10 +140,10 @@ def import_csv_data(df : pd.DataFrame):
         if len(df_minste_goed) > 1:
             maxvalue_tijd_delta = df_minste_goed['tijd_delta'].max()
             df_traagst = df_minste_goed[df_minste_goed['tijd_delta'] == maxvalue_tijd_delta]
-            naam_afvaller = df_traagst.index.tolist()[0]
+            naam_afvaller = df_traagst['naam'].tolist()[0]
             deelnemers_dict[naam_afvaller] = False
         else:
-            naam_afvaller = df_minste_goed.index.tolist()[0]
+            naam_afvaller = df_minste_goed['naam'].tolist()[0]
             deelnemers_dict[naam_afvaller] = False
     print(naam_afvaller)
 

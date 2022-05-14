@@ -170,6 +170,7 @@ def Click2(vraagnummer, aantal_vragen, correct, player, vragen, Canvas1, text_co
     string_vraag = str(vraagnummer) + '_tijd'
     if correct:
         player.vraag_goed()
+    player.add_bool_antwoord(correct)
     df_quiz[string_vraag] = time.time() - df_quiz.loc[df_quiz.index[0], string_vraag]
     player.add_antwoord(text)
     df_quiz[str(vraagnummer)] = correct
@@ -181,6 +182,11 @@ def Click2(vraagnummer, aantal_vragen, correct, player, vragen, Canvas1, text_co
         item.destroy()
 
     Canvas1.delete('mytag')
+    #Update tidelijke opslag met laatste antwoord
+    with open('tijdelijke_opslag.txt', 'w') as f:
+        f.write(f"{player.antwoorden}\n"
+                f"{player.bool_antwoorden}\n"
+                f"{player.tussen_tijd_berekenen()}")
     nieuwe_vraag(vraagnummer+1, aantal_vragen, vragen, Canvas1, text_coordy, text_coordx, root, full_height, full_width, button_no, button, player, txt_file)
 
 
@@ -194,7 +200,9 @@ def nieuwe_vraag(vraagnummer, aantal_vragen, vragen, Canvas1, text_coordy, text_
                                     player, vraagnummer, aantal_vragen, vragen, txt_file)
     else:
         df_quiz['antwoorden'] = ""
+        df_quiz['bool_antwoorden'] = ''
         df_quiz.loc[0,'antwoorden'] = player.antwoorden
+        df_quiz.loc[0, 'bool_antwoorden'] = player.bool_antwoorden
         logging.info(f"{player.naam} is klaar met de quiz, voeg toe aan csv")
         csv_naampje = absolute_pad + '\\losse_csv' + txt_file + "_"+  os.getlogin() + '.csv'
         df_quiz['eind_time'] = time.time()

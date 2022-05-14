@@ -22,7 +22,7 @@ class Spelers:
     def vraag_goed(self):
         self.vragen_goed += 1
     def add_bool_antwoord(self, bool_antwoord):
-        self.bool_antwoorden += bool_antwoord
+        self.bool_antwoorden += "}" + str(bool_antwoord)
     def tussen_tijd_berekenen(self):
         self.tussen_tijd = time.time() - self.test_tijd_begin
         return self.tussen_tijd

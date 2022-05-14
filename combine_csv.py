@@ -22,9 +22,9 @@ def combine_csv_from_same_test(test_nummer : int):
         """
         if index == 0:
             try:
-                df_final = pd.read_csv(f"{path}/quiz_{test_nummer}_{element}.csv")
+                df_final = pd.read_csv(f"{path}/quiz_{test_nummer}_{element}.csv", encoding='latin-1')
             except:
-                logging.error(f"Het bestand van {element} ontbreekt in de map losse_csv")
+                logging.error(f"Het bestand van {path}/quiz_{test_nummer}_{element}.csv ontbreekt in de map losse_csv")
                 error_occured = True
         else:
             try:
@@ -60,10 +60,10 @@ def combine_csv_from_same_test(test_nummer : int):
         namen = [s.strip().split(" ", 1)[0] for s in lines]
     ongeldige_mensen = ""
     for naam in namen:
-        if naam not in df_final.index.tolist():
+        if naam not in df_final['naam'].tolist():
             logging.error(f"{naam} zit in het spel maar heeft de test nog niet gemaakt")
             error_occured = True
-    for element in df_final.index.tolist():
+    for element in df_final['naam'].tolist():
         if element not in namen:
             ongeldige_mensen += element + ", "
     if ongeldige_mensen:
