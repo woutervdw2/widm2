@@ -57,10 +57,11 @@ def lees_quiz(txt_file, player):
         if lijst_regels[i].endswith('?'):
             current_question += 1
             vraag_dict[current_question] = [lijst_regels[i]]
-            
-        
         else:
-            vraag_dict[current_question].append(lijst_regels[i])
+            if len(lijst_regels[i]) < 2: #Vermijd antwoorden die bestaan uit alleen maar een spatie
+                continue
+            else:
+                vraag_dict[current_question].append(lijst_regels[i])
     if os.path.isfile(absolute_pad + '\\losse_csv\\'+ txt_file + "_" + os.getlogin() + '.csv'):
         pass
     else:
@@ -90,13 +91,13 @@ def maak_vraag(vraag_dict : dict, vraag_nummer : int, df_quiz : pd.DataFrame, ro
     df_quiz['vragen_goed'] = 0
     vraag_dict[vraag_nummer] = vraag_dict[vraag_nummer][1:]
     random.shuffle(vraag_dict[vraag_nummer])
+
     for i in range(0, len(vraag_dict[vraag_nummer])):
         if vraag_dict[vraag_nummer][i].startswith('!'):
             button_objects.append(Buttons(text=vraag_dict[vraag_nummer][i][1:], correct=True))
         
         else:
             button_objects.append(Buttons(text=vraag_dict[vraag_nummer][i], correct=False))
-            
     return vraag, button_objects
 
 def plaats_vraag(vraag, canvas, text_coordx, text_coordy, root):
@@ -108,12 +109,16 @@ def plaats_antwoorden(antwoorden, canvas, root, full_height, full_width,text_coo
                       vragen, txt_file):
     """Plaats de lijst met buttonobjecten op het scherm"""
     AFSTAND_TOT_VRAAG = 100
-    ysteps = (full_height-text_coordy-AFSTAND_TOT_VRAAG)/7
-    txt = tkFont.Font(family="OCR A Extended", size=30)
+    ysteps = (full_height-text_coordy-AFSTAND_TOT_VRAAG)/len(antwoorden)
+
+
     global buttons
     buttons = []
-    #todo controleer plaats en breek lange antwoorden
 
+    # print(antwoorden)
+    # if len(antwoorden) == 3:
+    #     for i in antwoorden:
+    #         print(i.text)
     for i in range(len(antwoorden)):
         if len(antwoorden)>3:
             xcoord = 20+i%2*full_width/2
@@ -123,7 +128,7 @@ def plaats_antwoorden(antwoorden, canvas, root, full_height, full_width,text_coo
                 ycoord = text_coordy + AFSTAND_TOT_VRAAG + ysteps * (i-1)
         else:
             xcoord = 20
-            ycoord = text_coordy + AFSTAND_TOT_VRAAG + ysteps * i*2
+            ycoord = text_coordy + AFSTAND_TOT_VRAAG + ysteps * i
 
         text = antwoorden[i].text
         text = textwrap.fill(text, width = 25)
@@ -150,7 +155,12 @@ def plaats_antwoorden(antwoorden, canvas, root, full_height, full_width,text_coo
 
 
         #Verander locatie van antwoord text
-        canvas.create_text(button_x1+80, button_y1, text=text, fill='white', font= onze_font,anchor=NW, tags='mytag')
+        if len(antwoorden) >= 6:
+            kleinere_font = ('OCR A Extended', 22, 'bold')
+            canvas.create_text(button_x1 + 80, button_y1, text=text, fill='white', font= kleinere_font,anchor=NW, tags='mytag')
+        else:
+            canvas.create_text(button_x1 + 80, button_y1, text=text, fill='white', font=onze_font, anchor=NW,
+                           tags='mytag')
         root.update()
         buttons.append(b)
 
@@ -171,7 +181,8 @@ def Click2(vraagnummer, aantal_vragen, correct, player, vragen, Canvas1, text_co
     if correct:
         player.vraag_goed()
     player.add_bool_antwoord(correct)
-    df_quiz[string_vraag] = time.time() - df_quiz.loc[df_quiz.index[0], string_vraag]
+    # df_quiz[string_vraag] = time.time() - df_quiz.loc[df_quiz.index[0], string_vraag]
+    df_quiz[string_vraag] = player.tussen_tijd_berekenen()
     player.add_antwoord(text)
     df_quiz[str(vraagnummer)] = correct
     sound_klik = pyglet.media.load('sound_klik.mp3', streaming=False)

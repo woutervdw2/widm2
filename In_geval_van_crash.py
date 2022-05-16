@@ -20,7 +20,7 @@ with open("tijdelijke_opslag.txt") as backup_file:
 
 tijdelijke_antwoorden_txt = lines[0].split('}')[1:]
 tijdelijke_antwoorden_bool = lines[1].split('}')[1:]
-tussentijd = lines[2][1:]
+tussentijd = lines[2]
 
 #schoon alle strings beetje op
 tijdelijke_antwoorden_txt = [antwoord.strip() for antwoord in tijdelijke_antwoorden_txt]
@@ -32,8 +32,9 @@ lijst_antwoorden[:len(tijdelijke_antwoorden_txt)] = tijdelijke_antwoorden_txt
 lijst_bool_antwoorden[:len(tijdelijke_antwoorden_bool)] = tijdelijke_antwoorden_bool
 nr_antwoorden_goed = lijst_bool_antwoorden.count('True')
 
-#Update tijd -3 als correctie
-nieuwe_tijd =  df_herstel.loc[naam_persoon, 'tijd_delta'] + float(tussentijd) - 3
+#Update tijd door tijd van gecrashede test bij tijd delta op te tellen en dan te verminderen met opgeslagen tijd
+vraag_nummer = len(lijst_antwoorden)
+nieuwe_tijd =  df_herstel.loc[naam_persoon, 'tijd_delta'] + float(tussentijd) - df_herstel.loc[naam_persoon, f'{vraag_nummer}_tijd']
 
 #Update csv met nieuwe waardes
 df_herstel.loc[naam_persoon, 'antwoorden'] = "}".join(lijst_antwoorden)
