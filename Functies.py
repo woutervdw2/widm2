@@ -80,7 +80,7 @@ def maak_vraag(vraag_dict : dict, vraag_nummer : int, df_quiz : pd.DataFrame, ro
     antwoorden_dict = {}
     button_objects = []
     vraag = vraag_dict[vraag_nummer][0]
-    MAX_LENGTH = 50
+    MAX_LENGTH = 75
     full_width = root.winfo_width()
     #Breek vragen
     vraag = textwrap.fill(text=vraag, width=MAX_LENGTH)
@@ -131,7 +131,7 @@ def plaats_antwoorden(antwoorden, canvas, root, full_height, full_width,text_coo
             ycoord = text_coordy + AFSTAND_TOT_VRAAG + ysteps * i
 
         text = antwoorden[i].text
-        text = textwrap.fill(text, width = 25)
+        text = textwrap.fill(text, width = 35)
         if antwoorden[i].correct:
             b = tk.Button(canvas, image=button_noklik, relief=FLAT, borderwidth=0, highlightthickness=0, bd=0,
                           command=lambda i=i: Click(i, button_klik,  vraagnummer, aantal_vragen,correct = True, player= player,
