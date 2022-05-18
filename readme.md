@@ -110,3 +110,5 @@ Zodra een computer uitvalt of om de een of andere reden valt het programma uit. 
 ``tijdelijke_opslag.txt`` en ``tijdelijke_opslag_tijd.txt``. Laat vervolgens diegene waarbij de test fout ging de test
 opnieuw maken. Nadat iedereen de test gemaakt heeft open je nu het csv bestand wat bij de test hoort en waar de persoon in 
 staat waarbij het programma crashte. Open ook het bestand ``tijdelijke_opslag.txt``. 
+
+# ff iets aanpassen
