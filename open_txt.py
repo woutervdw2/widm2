@@ -48,7 +48,7 @@ def maak_root():
     """Laat het canvas heel het venster innemen"""
     Canvas1.pack(fill=tk.BOTH, expand=True)
 
-    text_coordx, text_coordy = (full_width / 4, full_height / 7 - 100)
+    text_coordx, text_coordy = (full_width / 4, full_height  - (full_height-50))
 
 
 def quiz_invoer_scherm():
