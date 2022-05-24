@@ -48,7 +48,7 @@ def maak_root():
     """Laat het canvas heel het venster innemen"""
     Canvas1.pack(fill=tk.BOTH, expand=True)
 
-    text_coordx, text_coordy = (full_width / 4, full_height  - (full_height-50))
+    text_coordx, text_coordy = (10, 50)
 
 
 def quiz_invoer_scherm():
@@ -63,7 +63,7 @@ def quiz_invoer_scherm():
         button_begin = tk.Button(text='Enter', command=open_uitslag, font=onze_font)
         Canvas1.create_window(full_width / 2, full_height / 2, window=button_begin)
         Canvas1.create_window(full_width / 2, (full_height / 2) - 100, window=entry_begin)
-        Canvas1.create_text(text_coordx+20, text_coordy, text='Wat is het nummer van deze test?', fill='white', font=onze_font, tag='mytag')
+        Canvas1.create_text(text_coordx, text_coordy, text='Wat is het nummer van deze test?', fill='white', font=onze_font, tag='mytag', anchor=NW)
     else:
         open_uitslag()
     root.mainloop()
@@ -76,7 +76,7 @@ def test_maker():
     Canvas1.create_window(full_width / 2, full_height / 2, window=button_uitslag)
     Canvas1.create_window(full_width / 2, (full_height / 2) - 100, window=entry1)
     Canvas1.create_text(text_coordx, text_coordy, text='Wie maakt de test', fill='white', font=onze_font,
-                        tag='mytag')
+                        tag='mytag', anchor=NW)
     root.mainloop()
 
 

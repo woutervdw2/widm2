@@ -21,6 +21,8 @@ import logging
 
 absolute_pad = os.path.abspath('executie.py')[:-12]
 onze_font = ('OCR A Extended', 30,'bold')
+kleinere_font = ('OCR A Extended', 22,'bold')
+kleinste_font = ('OCR A Extended', 18,'bold')
 global voltooide_tests, aantal_deelnemers
 voltooide_tests = 0
 
@@ -101,7 +103,8 @@ def maak_vraag(vraag_dict : dict, vraag_nummer : int, df_quiz : pd.DataFrame, ro
     return vraag, button_objects
 
 def plaats_vraag(vraag, canvas, text_coordx, text_coordy, root):
-    canvas.create_text(50,text_coordy, text = vraag, fill = 'white', font = onze_font, anchor=tk.W, tag='mytag')
+    if len(vraag)> 70: #Gebruik kleinere font
+        canvas.create_text(text_coordx,text_coordy-10, text = vraag, fill = 'white', font = kleinere_font, anchor=NW, tag='mytag')
 
     root.update()
     
@@ -131,7 +134,7 @@ def plaats_antwoorden(antwoorden, canvas, root, full_height, full_width,text_coo
             ycoord = text_coordy + AFSTAND_TOT_VRAAG + ysteps * i
 
         text = antwoorden[i].text
-        text = textwrap.fill(text, width = 35)
+        text = textwrap.fill(text, width = 40)
         if antwoorden[i].correct:
             b = tk.Button(canvas, image=button_noklik, relief=FLAT, borderwidth=0, highlightthickness=0, bd=0,
                           command=lambda i=i: Click(i, button_klik,  vraagnummer, aantal_vragen,correct = True, player= player,
@@ -156,8 +159,8 @@ def plaats_antwoorden(antwoorden, canvas, root, full_height, full_width,text_coo
 
         #Verander locatie van antwoord text
         if len(antwoorden) >= 6:
-            kleinere_font = ('OCR A Extended', 22, 'bold')
-            canvas.create_text(button_x1 + 80, button_y1, text=text, fill='white', font= kleinere_font,anchor=NW, tags='mytag')
+            kleinere_font = ('OCR A Extended', 18, 'bold')
+            canvas.create_text(button_x1 + 80, button_y1, text=text, fill='white', font= kleinste_font,anchor=NW, tags='mytag')
         else:
             canvas.create_text(button_x1 + 80, button_y1, text=text, fill='white', font=onze_font, anchor=NW,
                            tags='mytag')
