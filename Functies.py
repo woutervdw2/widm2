@@ -92,7 +92,7 @@ def maak_vraag(vraag_dict : dict, vraag_nummer : int, df_quiz : pd.DataFrame, ro
     df_quiz[string_vraag] = time.time()
     df_quiz['vragen_goed'] = 0
     vraag_dict[vraag_nummer] = vraag_dict[vraag_nummer][1:]
-    random.shuffle(vraag_dict[vraag_nummer])
+    #random.shuffle(vraag_dict[vraag_nummer])
 
     for i in range(0, len(vraag_dict[vraag_nummer])):
         if vraag_dict[vraag_nummer][i].startswith('!'):
@@ -103,8 +103,11 @@ def maak_vraag(vraag_dict : dict, vraag_nummer : int, df_quiz : pd.DataFrame, ro
     return vraag, button_objects
 
 def plaats_vraag(vraag, canvas, text_coordx, text_coordy, root):
-    if len(vraag)> 70: #Gebruik kleinere font
+    if len(vraag)> 60: #Gebruik kleinere font
         canvas.create_text(text_coordx,text_coordy-10, text = vraag, fill = 'white', font = kleinere_font, anchor=NW, tag='mytag')
+    else:
+        canvas.create_text(text_coordx, text_coordy - 10, text=vraag, fill='white', font= onze_font, anchor=NW,
+                           tag='mytag')
 
     root.update()
     
@@ -118,10 +121,7 @@ def plaats_antwoorden(antwoorden, canvas, root, full_height, full_width,text_coo
     global buttons
     buttons = []
 
-    # print(antwoorden)
-    # if len(antwoorden) == 3:
-    #     for i in antwoorden:
-    #         print(i.text)
+
     for i in range(len(antwoorden)):
         if len(antwoorden)>3:
             xcoord = 20+i%2*full_width/2
