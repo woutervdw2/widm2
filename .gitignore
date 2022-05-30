@@ -7,3 +7,6 @@ __pycache__/Classes.cpython-39.pyc
 __pycache__/Functies.cpython-39.pyc
 __pycache__/combine_csv.cpython-38.pyc
 venv/
+*.log
+*.txt
+*.csv
