@@ -1,1 +1,15 @@
-dfafjnads fij
+###GEDAAN###
+
+Getest op plaatsen antwoorden en vragen werkt ook op myrnas laptop
+Getest met verschillende aantallen antwoorden en verschillende lengtes antwoorden/vragen
+Getest met het uitspelen van 3 achtereenvolgende quizes + executies
+Getest met 1 joker zonder vrijstellinge
+Getest op verschil in tijd en op goed tellen van juiste antwoorden
+
+
+###TO DO###(moet nog genoeg bij prob)
+Testen met meerdere jokers+vrijstellinen
+Crash tijdens test testen(in_geval_van_crash.py)
+
+
+
