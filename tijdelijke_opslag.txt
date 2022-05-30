@@ -1,3 +1,3 @@
-}Église des Dominicains, Hôtel de Ville en Maison Pfister dit is ook een hele lange vraag zeg
-}False
-2.8887548446655273
+}fout}fout}Fout
+}False}False}False
+12.490731716156006

@@ -63,7 +63,7 @@ def quiz_invoer_scherm():
         button_begin = tk.Button(text='Enter', command=open_uitslag, font=onze_font)
         Canvas1.create_window(full_width / 2, full_height / 2, window=button_begin)
         Canvas1.create_window(full_width / 2, (full_height / 2) - 100, window=entry_begin)
-        Canvas1.create_text(text_coordx, text_coordy, text='Wat is het nummer van deze test?', fill='white', font=onze_font, tag='mytag', anchor=NW)
+        Canvas1.create_text(text_coordx+30, text_coordy, text='Wat is het nummer van deze test?', fill='white', font=onze_font, tag='mytag', anchor=NW)
     else:
         open_uitslag()
     root.mainloop()
@@ -75,7 +75,7 @@ def test_maker():
     button_uitslag = tk.Button(text='Enter', command= doe_test, font=onze_font)
     Canvas1.create_window(full_width / 2, full_height / 2, window=button_uitslag)
     Canvas1.create_window(full_width / 2, (full_height / 2) - 100, window=entry1)
-    Canvas1.create_text(text_coordx, text_coordy, text='Wie maakt de test', fill='white', font=onze_font,
+    Canvas1.create_text(text_coordx+30, text_coordy, text='Wie maakt de test', fill='white', font=onze_font,
                         tag='mytag', anchor=NW)
     root.mainloop()
 
@@ -90,7 +90,7 @@ def doe_test():
     except:
         logging.error("Muziek niet aanwezig check test_muziek.wav")
 
-    speler = Spelers(naam=entry1.get(), mol=False, in_game=True)
+    speler = Spelers(naam=entry1.get().lower(), mol=False, in_game=True)
     vragen = lees_quiz(quiz_str, speler)
     aantal_vragen = len(vragen)
     Canvas1.delete('mytag')

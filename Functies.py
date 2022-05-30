@@ -20,7 +20,7 @@ import logging
 
 
 absolute_pad = os.path.abspath('executie.py')[:-12]
-onze_font = ('OCR A Extended', 30,'bold')
+onze_font = ('OCR A Extended', 22,'bold')
 kleinere_font = ('OCR A Extended', 22,'bold')
 kleinste_font = ('OCR A Extended', 18,'bold')
 global voltooide_tests, aantal_deelnemers

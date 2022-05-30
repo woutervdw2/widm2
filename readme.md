@@ -28,7 +28,7 @@ zeer waarschijnlijk jouw laptop.
 ```losse_csv``` op jouw computer.
    
 4. Open het bestand ``loginnamen.txt``. Hierin moet je alle verschillende ``username`` die aan het
-eind van de bestanden ``quiz_afleveringnummer_username.csv`` staan. In andere woorden, alle gebruikersnamen
+eind van de bestanden ``quiz_afleveringnummer_username.csv`` staan zetten. In andere woorden, alle gebruikersnamen
    van alle laptops waarop de test gemaakt is moeten hierin staan, ook de gebruikers naam van jouw laptop moet hierbij staan.
    Er mogen hier niet te veel gebruikers namen instaan. Dus stel test ``1`` is gemaakt op de laptop met username ``barta``
    maar test ``2`` niet meer, dan moet ``barta`` uit het bestand gehaald worden. Elke gebruikersnaam moet op een eigen regel staan
@@ -105,10 +105,15 @@ Dit los je op door het bestand ``jokers_vrijstellingen.txt`` van de usb-stick af
 van het project te zetten. Deze open je vervolgens en dan haal je alle namen uit het bestand van de mensen die
 uit het spel liggen. Sla vervolgens het bestand op.  
 
+# Muziek niet aanwezig
+De muziek file staat niet op de goede plaats. Controleer of "test_muziek.wav" in de map "widm" staat. 
+Zo niet dan moet je die even via de usb stick van jou laptop kopieëren
+
 ### In het geval dat de test bij een persoon uitvalt tijdens het maken.
 Zodra een computer uitvalt of om de een of andere reden valt het programma uit. maak dan een back-up van de bestanden
 ``tijdelijke_opslag.txt`` en ``tijdelijke_opslag_tijd.txt``. Laat vervolgens diegene waarbij de test fout ging de test
 opnieuw maken. Nadat iedereen de test gemaakt heeft open je nu het csv bestand wat bij de test hoort en waar de persoon in 
 staat waarbij het programma crashte. Open ook het bestand ``tijdelijke_opslag.txt``. 
 
-# ff iets aanpassen
+
+

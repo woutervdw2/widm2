@@ -110,7 +110,7 @@ def import_csv_data(df : pd.DataFrame):
 
     for i in range(len(jokers_vrijstellingen)):
 
-        current_persoon = jokers_vrijstellingen[i]
+        current_persoon = jokers_vrijstellingen[i].lower()
 
 
         if current_persoon.endswith('x'):
@@ -151,7 +151,7 @@ def import_csv_data(df : pd.DataFrame):
         with open("jokers_vrijstellingen.txt", "w") as f2:
             f2.truncate(0)
             for naam in jokers_vrijstellingen:
-                if naam == naam_afvaller.lower():
+                if naam.lower()[:len(naam_afvaller)] == naam_afvaller.lower():
                     f.write(f"{naam}\n")
                 else:
                     f.write(f"{naam}\n")

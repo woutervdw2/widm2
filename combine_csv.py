@@ -33,7 +33,7 @@ def combine_csv_from_same_test(test_nummer : int):
             except:
                 logging.error(f"Het bestand van {element} ontbreekt in de map losse_csv")
                 error_occured = True
-
+    df_final['naam'] = df_final['naam'].str.lower()
     if not error_occured:
 
         logging.info(f"Alle bestanden zijn geopend en samengevoegd.")
@@ -57,7 +57,7 @@ def combine_csv_from_same_test(test_nummer : int):
         Controleer of er mensen zijn die de test gemaakt hebben die niet meer in het spel zitten.
         """
         lines = file.readlines()[1:]
-        namen = [s.strip().split(" ", 1)[0] for s in lines]
+        namen = [s.strip().split(" ", 1)[0].lower() for s in lines]
     ongeldige_mensen = ""
     for naam in namen:
         if naam not in df_final['naam'].tolist():
