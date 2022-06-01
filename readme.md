@@ -105,7 +105,7 @@ Dit los je op door het bestand ``jokers_vrijstellingen.txt`` van de usb-stick af
 van het project te zetten. Deze open je vervolgens en dan haal je alle namen uit het bestand van de mensen die
 uit het spel liggen. Sla vervolgens het bestand op.  
 
-# Muziek niet aanwezig
+### Muziek niet aanwezig
 De muziek file staat niet op de goede plaats. Controleer of "test_muziek.wav" in de map "widm" staat. 
 Zo niet dan moet je die even via de usb stick van jou laptop kopieëren
 
